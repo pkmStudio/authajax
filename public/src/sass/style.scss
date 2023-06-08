@@ -1,0 +1,283 @@
+// Подключение шрифтов
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+//<ПЕРЕМЕННЫЕ>
+$minWidth: 320px; // мин размер
+$maxWidth: 1440; // полотно
+$maxWidthContainer: 1140; // огранич контейнер
+$fontFamily: "Yanone Kaffeesatz", sans-serif;
+//МИКСИНЫ>
+@import "mixins";
+// Обнуление
+@import "null";
+
+// Технические и основные классы =======
+
+body {
+   font-weight: 400;
+   font-family: $fontFamily;
+   line-height: 1.2;
+   color: #333;
+   font-size: 16px;
+   background-color: rgb(240, 240, 240);
+}
+
+._lock {
+   position: fixed;
+   overflow-y: hidden;
+   padding-right: 15px;
+}
+
+._container {
+	max-width: #{$maxWidthContainer + 'px'};
+	margin: 0 auto;
+	padding: 0 30px;
+}
+
+._page {
+	flex: 1 1 auto;
+}
+
+._d-none {
+   display: none;
+}
+.error-block {
+   background-color: #dea2a2;
+   color: #de2525;
+}
+.success-block {
+   max-width: 300px;
+   text-align: center;
+   margin: 0 auto;
+   padding: 0.5em 0.75em;
+   border-radius: 1.5em;
+   @include adaptiv-value(margin-top, 30, 10, 1);
+   background-color: #a2dea9;
+   color: #136c13;
+}
+
+.button {
+   color: #eee;
+   background-color: #de2525;
+   padding: 0.5em 1em;
+   border-radius: 1em;
+}
+
+// Отправка формы
+form::after {
+   content: "Идет отправка..";
+   padding-top: calc(100vh/2);
+   text-align: center;
+   font-size: 24px;
+   color: #eee;
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   opacity: 0;
+   visibility: hidden;
+   background-color: rgba(0, 168, 204, 0.6);
+}
+
+form._sending::after{
+   opacity: 1;
+   visibility: visible;
+}
+
+
+// Подсказка
+[data-title] {position: relative;}
+[data-title]::after {
+   position: absolute; 
+   z-index: 1;
+   top: 40px;
+   left: 0;
+}
+[data-title]::after {
+   content: attr(data-title); /* Выводим текст */
+   background-color: rgba(165, 42, 135, 0.9);
+   color: #b3b3b3;
+   opacity: 0;
+   transition: 1s;
+   pointer-events: none;
+   width: 200px;
+   padding: 0.5em;
+   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+[data-title]:hover::after {opacity: 1;} 
+
+
+// Показать пароль
+._showpass {
+   display: flex;
+   align-items: center;
+   @include adaptiv-value(gap, 20, 5, 1);
+   @include adaptiv-font(20, 14, 1);
+
+   // .showpass__label
+	&__label {
+	}
+
+	// .showpass__checkbox
+	&__checkbox {
+      width: 1em;
+      height: 1em;
+	}
+}
+
+// Секция с формой логинации / регистарции
+.form {
+   display: flex;
+   flex-direction: column;
+   @include adaptiv-font (20, 14, 1);
+
+   // .form__label
+   &__label {
+      margin-bottom: 5px;
+   }
+
+   // .form__input
+   &__input {
+      padding: 0.5em 0.75em;
+      border-radius: 1.5em;
+      @include adaptiv-value(margin-bottom, 20, 5, 1);
+   }
+
+   // .form__showpass
+   &__showpass {
+      @include adaptiv-value(margin-bottom, 20, 5, 1);
+   }
+
+   // .form__button
+   &__button {
+      align-self: flex-end;
+      @include adaptiv-value(margin-bottom, 20, 5, 1);
+   }
+
+   // .form__text
+   &__text {
+      text-align: center;
+   }
+
+   &__text a {
+      color: rgb(80, 180, 215);
+   }
+
+   &__text a:hover {
+      color: blue;
+   }
+}
+
+.section {
+   padding: 30px 0;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   position: relative;
+      // .section__title
+      &__title {
+         @include adaptiv-font (36, 18, 1);
+         align-self: start;
+         margin-bottom: 50px;
+      }
+      // .section__form
+      &__form {
+         width: 50%;
+         @media screen and (max-width: 767px) {
+            width: 100%;
+         }
+      }
+}
+
+// Личный кабинет 
+
+.account {
+   padding: 5px;
+   border: 1px solid #de2525;
+   border-radius: 10px;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   gap: 30px;
+
+   @media screen and (max-width: 767px) {
+      flex-direction: column;
+   }
+
+   // .account__image
+   &__image {
+      flex: 0 1 auto;
+      width: 250px;
+      height: 250px;
+      @media screen and (max-width: 767px) {
+         margin: 0 auto;
+      }
+      & img {
+         height: 100%;
+         border-radius: 10px;
+      }
+   }
+
+   // .account__info
+   &__info {
+      flex: 1 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      @include adaptiv-font (36, 15, 1);
+   }
+
+   // .account__name
+   &__name {
+   }
+
+   // .account__login
+   &__login {
+   }
+
+   // .account__birthday
+   &__birthday {
+   }
+
+   // .account__button
+   &__button {
+      align-self: flex-end;
+   }
+}
+
+
+
+
+// Сетка бутстрап
+// @media screen and (max-width: 1199px) {
+//    .container {
+//       padding: 0 15px;
+//       margin: 0 auto;
+//       width: 960px;
+//    }
+// }
+
+// @media screen and (max-width: 991px) {
+//    .container {
+//       padding: 0 15px;
+//       margin: 0 auto;
+//       width: 720px;
+//    }
+// }
+
+// @media screen and (max-width: 767px) {
+//    .container {
+//       padding: 0 15px;
+//       margin: 0 auto;
+//       width: 540px;
+//    }
+// }
+
+// @media screen and (max-width: 576px) {
+//    .container {
+//       padding: 0 15px;
+//       margin: 0 auto;
+//       width: 100%;
+//    }
+// }

@@ -1,0 +1,4 @@
+CREATE TABLE `auth`.`users` (`id` INT(11) NOT NULL AUTO_INCREMENT , `name` VARCHAR(64) NULL , `login` VARCHAR(32) NOT NULL , `password` VARCHAR(32) NOT NULL , `birthsday` INT(32) NULL , `image` VARCHAR(100) NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+CREATE TABLE `auth`.`LC` (`IP` VARCHAR(20) NOT NULL , `loginCounter` INT(3) NOT NULL , `time` VARCHAR(255) NOT NULL ) ENGINE = InnoDB;
